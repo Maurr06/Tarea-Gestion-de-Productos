@@ -77,7 +77,7 @@ def EliminarProducto():
 
 def GuardarDatos():
     try:
-        documento = open('productos.txt', 'a')
+        documento = open('productos.txt', 'w')
         for i in range(len(productos)):
 
             for llave in productos[i].keys():
@@ -91,15 +91,17 @@ def GuardarDatos():
         print("Error al abrir el documento productos.txt, revise si existe y si esta bien escrito.")
 
 def CargarDatos():
+    productos.clear()
     documento = open('productos.txt', 'r')
     
     for linea in documento.readlines():
         # Extraccion de informacion a partir de string
         partes = linea.split(', ')
-        nombre = partes[0][8:]
-        precio = float(partes[1][8:])
-        cantidad = (partes[2][10:])
-        
+        if len(partes) == 3:
+            nombre = partes[0][8:]
+            precio = float(partes[1][8:])
+            cantidad = (partes[2][10:])
+            
         # Carga en diccionario y lista
         dicc = {
             'nombre': nombre,
